@@ -1,0 +1,23 @@
+{
+    "name": "pacof/crud1",
+    "description": "Crud tabla Libros Autor",
+    "type": "project",
+    "license": "GNU/GPL",
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload" :{
+        "psr-4": {
+            "Clases\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "pacofer71",
+            "email": "pacofer71@gmail.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.10"
+    }
+}
