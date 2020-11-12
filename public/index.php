@@ -3,8 +3,13 @@ session_start();
 require '../vendor/autoload.php';
 $autor = new Clases\Autores();
 $autor->rellenar(15);
-$stmt = $autor->traerTodos();
+$total=$autor->totalAutores();
+$numPaginas=4;
+$totalPaginas=($total%$numPaginas==0)?$total/$numPaginas:(int)(($total/$numPaginas)+1);
+$pagina=isset($_GET['page'])?$_GET['page']:1;
+$stmt = $autor->traerTodos(($pagina-1)*$numPaginas, $numPaginas);
 $autor = null;
+
 
 ?>
 <!DOCTYPE html>
@@ -63,6 +68,11 @@ $autor = null;
         ?>
       </tbody>
     </table>
+    <?php
+      for($i=1; $i<=$totalPaginas; $i++){
+        echo "| <a href='index.php?page=$i'>$i</a> |";
+      }
+    ?>
   </div>
 
 </body>

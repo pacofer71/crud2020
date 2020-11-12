@@ -26,8 +26,8 @@ class Autores extends Conexion
         $this->apellidos=$n;
     }
     //-----------------------------------------------------------------------------------------
-    public function traerTodos(){
-        $cons="select * from autores order by apellidos, id_autor";
+    public function traerTodos($n, $t){
+        $cons="select * from autores order by apellidos, id_autor limit $n, $t";
         $stmt=parent::$conexion->prepare($cons);
         try{
             $stmt->execute();
@@ -125,9 +125,9 @@ class Autores extends Conexion
     public function hayAutores()
     {
         $cons = "select count(*) from autores";
-        $resultado = parent::$conexion->query($cons);
-        if ($resultado->fetchColumn() > 0) return true;
-        return false;
+        $numero=parent::$conexion->query($cons);
+        return $numero->fetchColumn()>0;
+        
 
     }
     //--------------------------------------------------------------------------------------------
@@ -140,6 +140,12 @@ class Autores extends Conexion
                 $id[]=$fila->id_autor;
         }
         return $id;
+    }
+    //-------------------------------------------------------------------------------------------------
+    public function totalAutores() : Int{
+        $cons = "select count(*) from autores";
+        $numero=parent::$conexion->query($cons);
+        return $numero->fetchColumn();
     }
    
    
