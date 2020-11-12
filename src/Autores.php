@@ -131,6 +131,16 @@ class Autores extends Conexion
 
     }
     //--------------------------------------------------------------------------------------------
+    public function devolverIdAutores(){
+        $cons="select id_autor from autores";
+        $stmt=parent::$conexion->prepare($cons);
+        $stmt->execute();
+        $id=[];
+        while($fila=$stmt->fetch(PDO::FETCH_OBJ)){
+                $id[]=$fila->id_autor;
+        }
+        return $id;
+    }
    
    
 
