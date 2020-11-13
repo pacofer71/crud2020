@@ -120,4 +120,31 @@ class Libros extends Conexion{
          return false;
  
      }
+     //-------------------------------------------------------------------------------------------------
+    public function totalLibros() : Int{
+        $cons = "select count(*) from libros";
+        $numero=parent::$conexion->query($cons);
+        return $numero->fetchColumn();
+    }
+    //------------------------------------------------------------------------------------------------------
+    public function traerTodos($n, $t){
+        $cons="select libros.*, apellidos, nombre from libros, autores where autor=id_autor order by apellidos, titulo limit $n, $t";
+        $stmt=parent::$conexion->prepare($cons);
+        try{
+            $stmt->execute();
+        }catch(PDOException $ex){
+            die("Error al recuperar los Libros!: ".$ex->getMessage());
+        }
+        return $stmt;
+    }
+    //------------------------------------   CRUD -----------------------------------------------------------
+    public function delete(){
+        $c="delete from libros where id_libro=:i";
+        $stmt=parent::$conexion->prepare($c);
+        try{
+            $stmt->execute([':i'=>$this->id_libro]);
+        }catch(PDOException $ex){
+            die("Error al borrar libro ".$ex->getMessage());
+        }
+    }
 }

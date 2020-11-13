@@ -67,7 +67,7 @@ $autor = null;
     </table>
     <?php
     for ($i = 1; $i <= $totalPaginas; $i++) {
-      echo "| <a href='index.php?page=$i'>$i</a> |";
+      echo "| <a href='index.php?page=$i' style='text-decoration:none;'>$i</a> |";
     }
     ?>
   </div>
