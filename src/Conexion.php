@@ -2,6 +2,9 @@
 namespace Clases;
 use PDO;
 use PDOException;
+
+
+
 class conexion{
     protected static $conexion;
 
@@ -12,9 +15,10 @@ class conexion{
     }
 
     private static function crearConexion(){
-        $user="admin";
-        $pass="secreto";
-        $bbdd="daw1";
+        $opciones=parse_ini_file("../config.ini");
+        $user=$opciones["usuario"];
+        $pass=$opciones["pass"];
+        $bbdd=$opciones["bbdd"];
         $dsn="mysql:host=localhost;dbname=$bbdd;charset=utf8mb4";
         try {
             self::$conexion = new PDO($dsn, $user, $pass);
