@@ -5,7 +5,7 @@ use PDOException;
 
 
 
-class conexion{
+class Conexion{
     protected static $conexion;
 
     public function __construct(){
