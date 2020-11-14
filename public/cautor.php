@@ -19,7 +19,7 @@ use Clases\Autores;
         $autor->create();
         $autor=null;
         $_SESSION['msg']="Autor guardado correctamente";
-        header('Location:index.php');
+        header('Location:autores.php');
 
     }else{
 

@@ -12,4 +12,4 @@ $autor->setId_autor($id);
 $autor->delete();
 $autor=null;
 $_SESSION['msg']="Autor Borrado Corectamente";
-header('Location:index.php');
+header('Location:autores.php');

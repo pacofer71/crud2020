@@ -77,6 +77,9 @@ class Libros extends Conexion{
 
         return $this;
     }
+    public function getPortada(){
+        return $this->portada;
+    }
     //----------------------------------   Otras funciones
      //Rellenar ------------------------------------------------------------------
      public function rellenar($cant)
@@ -137,7 +140,32 @@ class Libros extends Conexion{
         }
         return $stmt;
     }
+    //--------------------------------------------------------------------------------------------------
+    public function devolverPortada($i){
+        $c="select portada from libros where id_libro=:i";
+        $stmt=parent::$conexion->prepare($c);
+        $stmt->execute([':i'=>$i]);
+        $fila=$stmt->fetch(PDO::FETCH_OBJ);
+        return $fila->portada;
+    }
     //------------------------------------   CRUD -----------------------------------------------------------
+    public function create(){
+        $c1="insert into libros(titulo, autor, isbn, portada) values (:t, :a, :i, :p)";
+        $c2="insert into libros(titulo, autor, isbn) values (:t, :a, :i)";
+        $array=[':t'=>$this->titulo, ':a'=>$this->autor, ':i'=>$this->isbn];
+        if(isset($this->portada)){
+            $array[":p"]=$this->portada;
+            $stmt=parent::$conexion->prepare($c1);
+        }else{
+            $stmt=parent::$conexion->prepare($c2);
+        }
+       
+        try{
+            $stmt->execute($array);
+        }catch(PDOException $ex){
+            die("Error al insertar el Libro: ".$ex->getMessage());
+        }
+    }
     public function delete(){
         $c="delete from libros where id_libro=:i";
         $stmt=parent::$conexion->prepare($c);

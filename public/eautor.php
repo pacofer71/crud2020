@@ -26,7 +26,7 @@ if (isset($_POST['update'])) {
     $autor->update();
     $autor = null;
     $_SESSION['msg'] = "Autor actualizado correctamente";
-    header('Location:index.php');
+    header('Location:autores.php');
 } else {
     $autor = new Autores();
     $autor->setId_autor($id);

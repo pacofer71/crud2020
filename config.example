@@ -1,5 +1,5 @@
 ; Archivo de configuración
 [opciones]
-usuario=tu usuario
-pass=tu pass
-bbdd=tu bbdd
+usuario=your user
+pass=your pass
+bbdd=your bbd
