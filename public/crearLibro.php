@@ -15,51 +15,45 @@ $autor = new Autores();
 $stmt = $autor->traerTodos(0, 200);
 $autor = null;
 //----------------------
-function isImage($tipo){
-    $imagenes=["image/gif", "image/x-icon", "image/jpeg", "image/png", "image/svg+xml", "image/tiff", "image/webp"];
+function isImage($tipo)
+{
+    $imagenes = ["image/gif", "image/x-icon", "image/jpeg", "image/png", "image/svg+xml", "image/tiff", "image/webp"];
     return in_array($tipo, $imagenes);
-
 }
-function mostrarError($err){
-    $_SESSION['error']=$err;
+function mostrarError($err)
+{
+    $_SESSION['error'] = $err;
     header("Location:{$_SERVER['PHP_SELF']}");
-
 }
 
 
 
 if (isset($_POST['crear'])) {
-    $libro= new Libros();
+    $libro = new Libros();
     $titulo = trim(ucwords($_POST['titulo']));
-    $isbn=$_POST['isbn'];
-    $autor=$_POST['autor'];
-    if(is_uploaded_file($_FILES['portada']['tmp_name'])){
-        if(isImage($_FILES['portada']['type'])){
-            $nombre="./img/".uniqid()."_".$_FILES['portada']['name'];
+    $isbn = $_POST['isbn'];
+    $autor = $_POST['autor'];
+    if (is_uploaded_file($_FILES['portada']['tmp_name'])) {
+        if (isImage($_FILES['portada']['type'])) {
+            $nombre = "./img/" . uniqid() . "_" . $_FILES['portada']['name'];
             move_uploaded_file($_FILES['portada']['tmp_name'], $nombre);
             $libro->setPortada($nombre);
-        }
-        else{
-            $mensaje="Error la portada debe ser un archivo de imagen";
+        } else {
+            $mensaje = "Error la portada debe ser un archivo de imagen";
             mostrarError($mensaje);
         }
     }
-    
+
     $libro->setTitulo($titulo);
     $libro->setIsbn($isbn);
     $libro->setAutor($autor);
     $libro->create();
-    $libro=null;
-    $_SESSION['mensaje']="Libro creado Correctamente";
+    $libro = null;
+    $_SESSION['mensaje'] = "Libro creado Correctamente";
     header("Location:libros.php");
-
-
-
     $_SESSION['msg'] = "Libro guardado correctamente";
     header('Location:libros.php');
 } else {
-
-
 
 ?>
     <html lang="es">
@@ -115,7 +109,7 @@ if (isset($_POST['crear'])) {
                         <label class="col-form-label">Portada:</label>
                     </div>
                     <div class="col">
-                       <input type="file" class="form-control" id="p" name="portada">
+                        <input type="file" class="form-control" id="p" name="portada">
                     </div>
                 </div>
                 <div class="row mt-3">
