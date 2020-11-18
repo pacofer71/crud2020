@@ -49,8 +49,7 @@ if (isset($_POST['crear'])) {
     $libro->setAutor($autor);
     $libro->create();
     $libro = null;
-    $_SESSION['mensaje'] = "Libro creado Correctamente";
-    header("Location:libros.php");
+   
     $_SESSION['msg'] = "Libro guardado correctamente";
     header('Location:libros.php');
 } else {
@@ -106,7 +105,7 @@ if (isset($_POST['crear'])) {
                         <input type="text" minlength=13 maxlength=13 required pattern="[0-9]{13}" name="isbn" class='form-control'>
                     </div>
                     <div class="col-1">
-                        <label class="col-form-label">Portada:</label>
+                        <label class="col-form-label" for="p">Portada:</label>
                     </div>
                     <div class="col">
                         <input type="file" class="form-control" id="p" name="portada">
